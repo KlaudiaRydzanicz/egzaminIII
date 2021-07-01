@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-import {CityComponent} from '../city/city.component';
-import { City } from '../models/City';
+import {City} from '../models/City';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-city-detail',
@@ -9,12 +8,12 @@ import { City } from '../models/City';
   styleUrls: ['./city-detail.component.scss']
 })
 export class CityDetailComponent implements OnInit {
-@Input() modal: any;
-  currentCity!: City ;
-  constructor(private cityComponent: CityComponent) { }
+  @Input() modal: any;
+  @Input() currentCity!: City;
 
-  ngOnInit(): void {
-  this.currentCity = this.cityComponent.currentCity;
+  constructor(public activeModal: NgbActiveModal) {
   }
 
+  ngOnInit(): void {
+  }
 }

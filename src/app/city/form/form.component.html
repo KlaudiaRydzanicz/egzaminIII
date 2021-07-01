@@ -1,5 +1,4 @@
-
-  <h4 class="modal-title pull-left">{{message}}</h4>
+<h4 class="modal-title pull-left">{{message}}</h4>
 
 <div *ngIf="!submitted">
   <form [formGroup]="form" class="d-flex flex-column" (ngSubmit)="upDate()">
@@ -11,11 +10,13 @@
     <label>
       Location
       <input type="text" formControlName="location" class="form-control" id="location">
-      <div *ngIf="errorMessage('location', 'required')" class="alert alert-danger">
-        Coordinates is required.</div>
-      <div *ngIf="errorMessage('location', 'pattern')" class="alert alert-danger">
-        The coordinates format is incorrect</div>
     </label>
+    <div *ngIf="errorMessage('location', 'required')" class="alert alert-danger">
+      Coordinates is required.
+    </div>
+    <div *ngIf="errorMessage('location', 'pattern')" class="alert alert-danger">
+      The coordinates format is incorrect
+    </div>
     <label>
       Description
       <input type="text" formControlName="description" class="form-control" id="description">
@@ -23,13 +24,13 @@
     <label>
       URL
       <input type="text" class="form-control" formControlName="url" id="url">
-      <div *ngIf="errorMessage('url', 'required')" class="alert alert-danger">
-        URL is required.</div>
-      <div *ngIf="errorMessage('url', 'pattern')" class="alert alert-danger">
-        The URL format is incorrect</div>
-
-
     </label>
+    <div *ngIf="errorMessage('url', 'required')" class="alert alert-danger">
+      URL is required.
+    </div>
+    <div *ngIf="errorMessage('url', 'pattern')" class="alert alert-danger">
+      The URL format is incorrect
+    </div>
     <div class="d-flex justify-content-between mt-2">
       <button type="submit" class="btn btn-outline-primary" [disabled]="form.invalid" id="update">Update</button>
     </div>

@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {City} from '../models/City';
 import {CityService} from '../city.service';
 import {Router} from '@angular/router';
+import {CityDetailComponent} from "../city-detail/city-detail.component";
 
 
 @Component({
@@ -13,11 +14,7 @@ import {Router} from '@angular/router';
 })
 export class CityComponent implements OnInit {
   @Input() cities: City[] = [];
-  @Input() city!: City;
-  @Input() currentCity!: City;
   currentIndex = -1;
-  closeResult = '';
-
 
   constructor(private cityService: CityService, private modalService: NgbModal, private router: Router) {
   }
@@ -33,11 +30,11 @@ export class CityComponent implements OnInit {
   }
 
   editObject(city: City): void {
-    this.router.navigateByUrl(`/edit/${city.id}`);
+    this.router.navigateByUrl(`/edit/${city.id}`).catch(console.error);
   }
 
   newObject(): void {
-    this.router.navigateByUrl(`/add`);
+    this.router.navigateByUrl(`/add`).catch(console.error);
   }
 
   deleteCity(id: string): void {
@@ -46,23 +43,8 @@ export class CityComponent implements OnInit {
     });
   }
 
-  open(content: any): void {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  getDismissReason(reason: ModalDismissReasons): string {
-    switch (reason) {
-      case ModalDismissReasons.ESC:
-        return 'by pressing ESC';
-      case  ModalDismissReasons.BACKDROP_CLICK:
-        return 'by clicking on a backdrop';
-      default:
-        return `with: ${reason}`;
-    }
-
+  open(currentCity: City): void {
+    const modalRef = this.modalService.open(CityDetailComponent, {ariaLabelledBy: 'modal-basic-title'})
+    modalRef.componentInstance.currentCity = currentCity;
   }
 }

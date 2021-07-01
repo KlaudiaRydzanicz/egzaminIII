@@ -1,13 +1,24 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">{{currentCity.name}}</h4>
+  <h4 class="modal-title">Hi there!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 <div class="modal-body">
-  <ul class="list-group">
-    <li class="list-group-item">ID: {{currentCity.id}}</li>
-    <li class="list-group-item">Location: {{currentCity.location}}</li>
-    <li class="list-group-item">URL: {{currentCity.url}} </li>
-    <li class="list-group-item">Description: {{currentCity.description}}</li>
-
-  </ul>
- </div>
-
+  <ng-container *ngIf="currentCity">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{currentCity.name}}</h4>
+    </div>
+    <div class="modal-body">
+      <ul class="list-group">
+        <li class="list-group-item">ID: {{currentCity.id}}</li>
+        <li class="list-group-item">Location: {{currentCity.location}}</li>
+        <li class="list-group-item">URL: {{currentCity.url}} </li>
+        <li class="list-group-item">Description: {{currentCity.description}}</li>
+      </ul>
+    </div>
+  </ng-container>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
