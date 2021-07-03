@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-
 import {CityComponent} from '../city/city.component';
 import {City} from '../models/City';
 import {CityService} from '../city.service';
@@ -14,12 +13,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class FormComponent implements OnInit {
   id = '';
-  cities!: City[];
   city!: City;
   submitted = false;
   message = '';
   form: FormGroup;
-  @Input() getCity!: () => void;
   regexURL = /(pl.wikipedia.org|en.wikipedia.org)/gm;
   regexDD = /^[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?)$/;
 
@@ -33,14 +30,10 @@ export class FormComponent implements OnInit {
         url: new FormControl('', [Validators.required, Validators.pattern(this.regexURL)])
       });
     this.aRoute.params.subscribe(params => this.id = params.id);
-    if (!this.id) {
-      return;
-    }
   }
 
   errorMessage(controlName: string, errorName: string): boolean {
-    const control = this.form.get(controlName);
-    return(control?.touched && control?.errors?.[errorName]);
+    return this.form.controls[controlName].touched &&  this.form.controls[controlName]?.errors?.[errorName];
   }
 
   ngOnInit(): void {
@@ -61,15 +54,15 @@ export class FormComponent implements OnInit {
 
   upDate(): void {
     if (this.city) {
-      this.cityService.updateCity(this.city, this.form.value).subscribe(() => {
+      this.cityService.updateCity(this.form.value, this.city.id).subscribe(() => {
         this.message = 'Edit City';
-        this.router.navigateByUrl(`/`);
-        this.getCity();
+        this.router.navigateByUrl(`/`).catch(console.error);
         this.submitted = true;
         this.cityComponent.showCities();
       });
       return;
     }
+
     this.message = 'Add new City';
     const newValue = this.form.value;
     newValue.id = '_' + Math.random().toString(36).substr(2, 9);
