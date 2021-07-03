@@ -37,17 +37,17 @@
     },
     {
       "name": "Krakow",
-      "location": "a21,4566, 23,7890",
-      "description": "Kraków test",
-      "url": "https://en.wikipedia.org/wiki/test",
-      "id": "_rrepxdd9l"
-    },
-    {
-      "name": "Krakow",
       "location": "21.0122, 13.23456",
       "description": "Kraków test",
       "url": "https://en.wikipedia.org/wiki/",
       "id": "_81kq738ds"
+    },
+    {
+      "name": "test",
+      "location": "12.23456, 12.3456",
+      "description": "test",
+      "url": "https://en.wikipedia.org/wiki/",
+      "id": "_5nuukjf3j"
     }
   ],
   "customers": [
