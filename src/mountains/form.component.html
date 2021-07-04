@@ -1,0 +1,28 @@
+<p>form works!</p>
+<div class="container mt-auto">
+<form [formGroup]="newForm" class="d-flex flex-column" (ngSubmit)="mountainToEdit ? editMountain() : addNewMountain()">
+  <label for="name">Name: </label><input class="form-control" formControlName="name" id="name" name="name" type="string"/>
+  <div *ngIf="errorMessage('name', 'required')" class="alert alert-danger">
+    Name is required.
+  </div>
+  <label for="pasmo">Pasmo: </label><input class="form-control" formControlName="pasmo" id="pasmo" name="pasmo" type="string"/>
+  <div *ngIf="errorMessage('pasmo', 'required')" class="alert alert-danger">
+    pasmo is required.
+  </div>
+  <label for="url">Url: </label><input class="form-control" formControlName="url" id="url" name="url" type="url"/>
+  <div *ngIf="errorMessage('url', 'required')" class="alert alert-danger">
+    url is required.
+  </div>
+  <div *ngIf="patternErrorMessage('url', 'pattern')" class="alert alert-danger">
+    Url is invalid!
+  </div>
+  <label for="name">Location: </label><input class="form-control" formControlName="location" id="location" name="location" type="string"/>
+  <div *ngIf="errorMessage('location', 'required')" class="alert alert-danger">
+    Location is required.
+  </div>
+  <div *ngIf="patternErrorMessage('location', 'pattern')" class="alert alert-danger">
+    Location is invalid!
+  </div>
+  <button type="submit" class="btn btn-outline-success add-edit" [disabled]="newForm.invalid">Add/Edit</button>
+</form>
+</div>
