@@ -1,0 +1,33 @@
+<p>mountains works!</p>
+<button class="btn btn-outline-info add-new" type="button" routerLink="add">Add new</button>
+<div class="list-row col-sm-12 d-inline-flex" *ngIf="mountains">
+  <div class="col-md-3">
+    <h4>Mountains list</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let mountain of mountains">
+        {{mountain.name}}
+        <div class="btn-group">
+          <button class="btn btn-outline-success" type="button" (click)="show(mountain)">
+            Detail
+          </button>
+          <button class="btn btn-outline-success" type="button" (click)="edit(mountain)">
+            Edit
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!mountains">
+    <p>Please click on a City</p>
+  </div>
+  <div class="card col-sm-7" *ngIf="selectedMountain">
+    <div class="card-header">{{selectedMountain.name}}</div>
+    <div class="class-body">
+      <p>Pasmo: {{selectedMountain.pasmo}}</p>
+      <p>Lokacja: {{selectedMountain.location}}</p>
+      <p>Url: {{selectedMountain.url}}</p>
+    </div>
+  </div>
+</div>
+
+
